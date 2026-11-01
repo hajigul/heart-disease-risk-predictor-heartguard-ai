@@ -5,9 +5,29 @@
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-Keras-orange)
 ![Gradio](https://img.shields.io/badge/UI-Gradio-red)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR-USERNAME/cardiorisk-nn/blob/main/heart_disease_prediction.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/hajigul/heart-disease-risk-predictor-heartguard-ai/blob/main/heart_disease_prediction.ipynb)
 
 > ⚠️ **Disclaimer:** This project is for educational purposes only. It is not a medical device and must not be used for diagnosis or clinical decisions.
+
+---
+
+## Dashboard Preview
+
+### Patient input and result
+
+Enter a patient's profile and clinical test results, then click **Predict Risk** (or load one of the three sample patients). The result card shows the estimated probability and the risk level.
+
+<p align="center">
+  <img src="p1.png" alt="Single patient input form and risk result card" width="100%">
+</p>
+
+### Risk gauge, probabilities, and key drivers
+
+Each prediction comes with a risk gauge, a probability chart with the 50% decision threshold, and a **"What drives this prediction?"** chart. The key drivers chart shows how much each input raises (red) or lowers (green) the risk compared with a typical patient. Every prediction is also logged in a session history table.
+
+<p align="center">
+  <img src="p2.png" alt="Risk gauge, prediction probabilities, key drivers chart, and prediction history" width="100%">
+</p>
 
 ---
 
@@ -20,9 +40,9 @@ CardioRisk-NN trains a small feed-forward neural network to estimate the probabi
 - **End-to-end pipeline:** loading, one-hot encoding, stratified split, scaling, training, and evaluation
 - **Regularized neural network:** dropout layers and early stopping against overfitting
 - **Interactive dashboard (Gradio):**
-  - **Single Patient:** input form, colour-coded risk gauge, probability bars, and a *"What drives this prediction?"* chart
+  - **Single Patient:** input form, colour-coded risk gauge, probability bars, and a key drivers chart
   - **Batch Prediction:** upload a CSV, get predictions for every row, and download the results
-  - **Model Insights:** training curves, confusion matrix, and test accuracy
+  - **Model Insights:** test accuracy, precision, recall, F1-score, training curves, and confusion matrix
   - **About:** a description of each input feature
 - **Session history:** keeps a log of the patients checked in the current session
 
@@ -34,6 +54,8 @@ The [UCI Heart Disease dataset](https://archive.ics.uci.edu/dataset/45/heart+dis
 |---|---|
 | Numeric | `age`, `trestbps`, `chol`, `thalach`, `oldpeak` |
 | Categorical | `sex`, `cp`, `fbs`, `restecg`, `exang`, `slope`, `ca`, `thal` |
+
+The dataset file (`heart.csv`) is not included in this repository. Download it from UCI or Kaggle and place it where the notebook's `path` variable points.
 
 ## Methodology
 
@@ -71,44 +93,34 @@ Evaluated on the held-out test set (61 patients):
 
 > The test set is small (61 samples), so these figures carry considerable uncertainty. Cross-validation would give a more reliable estimate.
 
-## Screenshots
-
-| Single Patient | Model Insights |
-|---|---|
-| ![Single patient](screenshots/single_patient.png) | ![Model insights](screenshots/model_insights.png) |
-
 ## Getting Started
 
 ### Option 1: Google Colab (recommended)
 
-1. Click the **Open in Colab** badge above.
-2. Upload `data/heart.csv` to your Colab session or Google Drive, and update the `path` variable in the data-loading cell.
+1. Click the **Open in Colab** badge at the top.
+2. Upload `heart.csv` to your Google Drive or Colab session and update the `path` variable in the data-loading cell.
 3. Run all cells in order. The last cell launches the dashboard and prints a public link.
 
 ### Option 2: Run locally
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/cardiorisk-nn.git
-cd cardiorisk-nn
+git clone https://github.com/hajigul/heart-disease-risk-predictor-heartguard-ai.git
+cd heart-disease-risk-predictor-heartguard-ai
 python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+pip install numpy pandas matplotlib scikit-learn tensorflow gradio jupyter
 jupyter notebook heart_disease_prediction.ipynb
 ```
 
-When running locally, remove the Google Drive mount cell and set `path = 'data/heart.csv'`.
+When running locally, remove the Google Drive mount cell and set `path` to the location of your `heart.csv`.
 
 ## Project Structure
 
 ```
-cardiorisk-nn/
+heart-disease-risk-predictor-heartguard-ai/
 ├── heart_disease_prediction.ipynb   # Training, evaluation, and dashboard
-├── data/
-│   └── heart.csv                    # UCI Heart Disease (Cleveland) dataset
-├── screenshots/                     # Dashboard images used in this README
-├── requirements.txt
-├── .gitignore
-├── LICENSE
+├── p1.png                           # Dashboard screenshot: inputs and result
+├── p2.png                           # Dashboard screenshot: charts and history
 └── README.md
 ```
 
@@ -128,15 +140,11 @@ Upload a CSV with these columns (the `target` column is optional, and if present
 
 Python · TensorFlow/Keras · scikit-learn · pandas · NumPy · Matplotlib · Gradio
 
-## License
-
-Released under the [MIT License](LICENSE).
-
 ## Acknowledgements
 
 - Dataset: Janosi, A., Steinbrunn, W., Pfisterer, M., Detrano, R. *Heart Disease*. UCI Machine Learning Repository.
 
 ## Author
 
-**Your Name**
-[GitHub](https://github.com/YOUR-USERNAME) · [LinkedIn](https://linkedin.com/in/YOUR-PROFILE) · your.email@example.com
+**Haji Gul**
+[GitHub](https://github.com/hajigul) · hajigul1993@gmail.com
